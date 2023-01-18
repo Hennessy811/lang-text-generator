@@ -37,10 +37,11 @@ export default function Navbar() {
   const user = session.data?.user;
   const username = user?.name ?? user?.email ?? "Default";
 
+  const tutorTextColor = useColorModeValue("gray.600", "gray.400");
   return (
     <>
       <Box
-        bg={useColorModeValue("white", "gray.900")}
+        bg={useColorModeValue("white", "gray.700")}
         px={4}
         py={2}
         shadow="sm"
@@ -48,9 +49,11 @@ export default function Navbar() {
         <Container maxW="container.xl">
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
             <Box>
-              <Text fontSize="2xl" fontWeight="bold">
-                TextMastery Tutor
-              </Text>
+              <Link href="/">
+                <Text fontSize="2xl" fontWeight="bold">
+                  TextMastery Tutor
+                </Text>
+              </Link>
             </Box>
 
             <Flex alignItems={"center"}>
@@ -80,7 +83,7 @@ export default function Navbar() {
                           ml="2"
                         >
                           <Text fontSize="sm">{username}</Text>
-                          <Text fontSize="xs" color="gray.600">
+                          <Text fontSize="xs" color={tutorTextColor}>
                             Tutor
                           </Text>
                         </VStack>

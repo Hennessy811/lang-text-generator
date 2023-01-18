@@ -3,7 +3,7 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { ToastContainer, toast } from "react-toastify";
 import { ChakraProvider } from "@chakra-ui/react";
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -28,6 +28,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <Component {...pageProps} />
           <ToastContainer />
         </AppShell>
+        {process.env.NODE_ENV === "development" && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
       </ChakraProvider>
     </SessionProvider>
   );

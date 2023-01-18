@@ -17,7 +17,7 @@ datasource db {
 // Necessary for Next auth
 model Account {
     id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-    userId             String
+    userId             String  @db.ObjectId
     access_token       String?
     expires_at         BigInt?
     oauth_token        String?
@@ -37,21 +37,22 @@ model Account {
 model Session {
     id           String   @id @default(auto()) @map("_id") @db.ObjectId
     sessionToken String   @unique
-    userId       String
+    userId       String   @db.ObjectId
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(auto()) @map("_id") @db.ObjectId
-    email         String    @unique
-    emailVerified DateTime?
-    image         String?
-    name          String?
-    accounts      Account[]
-    sessions      Session[]
-    role          String?   @default("user")
-    createdAt     DateTime? @default(now())
+    id             String          @id @default(auto()) @map("_id") @db.ObjectId
+    email          String          @unique
+    emailVerified  DateTime?
+    image          String?
+    name           String?
+    accounts       Account[]
+    sessions       Session[]
+    role           String?         @default("user")
+    createdAt      DateTime?       @default(now())
+    generatedTexts GeneratedText[]
 }
 
 model VerificationToken {
@@ -61,4 +62,18 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model GeneratedText {
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    text      String
+    createdAt DateTime? @default(now())
+    user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String?   @db.ObjectId
+
+    prompt   String
+    topic    String
+    keywords String
+    language String
+    level    String
 }

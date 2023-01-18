@@ -21,6 +21,7 @@ export const serverSchema = z.object({
   ),
 
   SMTP_PASSWORD: z.string().min(1),
+  OPENAI_API_KEY: z.string().min(1),
 });
 
 /**
@@ -34,6 +35,7 @@ export const serverEnv = {
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 };
 
 /**
