@@ -43,6 +43,7 @@ specifiers:
   eslint-config-next: 13.1.1
   framer-motion: ^8.4.6
   google-translate-api: ^2.3.0
+  howler: ^2.2.3
   lodash: ^4.17.21
   next: 13.1.1
   next-auth: ^4.18.7
@@ -88,6 +89,7 @@ dependencies:
   axios: 1.2.3
   framer-motion: 8.4.6_biqbaboplfbrettd7655fr4n2y
   google-translate-api: 2.3.0
+  howler: 2.2.3
   lodash: 4.17.21
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_q76c2b4vyoegvsbrcwkfvimnai
@@ -3821,6 +3823,10 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
+
+  /howler/2.2.3:
+    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
     dev: false
 
   /html-tags/3.2.0:
