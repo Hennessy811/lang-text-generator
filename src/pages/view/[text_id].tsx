@@ -214,6 +214,7 @@ const ViewGeneratedText = (
             </Flex>
 
             <Flex gap={4}>
+              {/* @ts-expect-error blah */}
               <Box flex={1} ref={textSnippet}>
                 {textQuery.data?.text.split("\n").map((line, idx) => (
                   <Text my={4} key={`line-${idx}-${line}`}>

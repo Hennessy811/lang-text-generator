@@ -4,8 +4,9 @@ import { mode } from "@chakra-ui/theme-tools";
 const theme = extendTheme({
   config: {},
   styles: {
-    global: (props) => ({
+    global: (props: any) => ({
       body: {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         bg: mode("#f8fafc", "#1e293b")(props),
       },
     }),
