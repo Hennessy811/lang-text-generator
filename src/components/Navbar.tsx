@@ -28,7 +28,7 @@ import {
 } from "@chakra-ui/icons";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignIn, faUser } from "@fortawesome/pro-solid-svg-icons";
+import { faLanguage, faSignIn, faUser } from "@fortawesome/pro-solid-svg-icons";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -56,7 +56,14 @@ export default function Navbar() {
               </Link>
             </Box>
 
-            <Flex alignItems={"center"}>
+            <Flex alignItems={"center"} gap={4}>
+              <Button
+                title="Translation will be to English"
+                isDisabled
+                leftIcon={<FontAwesomeIcon icon={faLanguage} />}
+              >
+                EN
+              </Button>
               <Stack direction={"row"} spacing={4}>
                 <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

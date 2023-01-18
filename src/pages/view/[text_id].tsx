@@ -104,11 +104,11 @@ const ViewGeneratedText = (
   const translateMutation = api.translate.translate.useMutation({});
   const voiceoverQuery = api.translate.voiceover.useQuery(
     {
-      lang: "en",
+      lang: sourceLang,
       text: textQuery.data?.text ?? "",
     },
     {
-      enabled: !!textQuery.data?.text,
+      enabled: !!textQuery.data?.text && !!sourceLang,
       ...noRefetch,
       onSuccess(data) {
         const sounds = data?.map((v) => {
@@ -183,7 +183,7 @@ const ViewGeneratedText = (
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       textSnippet.current?.removeEventListener("mouseup", listener);
     };
-  });
+  }, []);
 
   return (
     <Flex gap={6}>

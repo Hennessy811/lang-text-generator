@@ -46,6 +46,7 @@ specifiers:
   google-translate-api: ^2.3.0
   google-tts-api: ^2.0.2
   howler: ^2.2.3
+  jotai: ^1.13.1
   lodash: ^4.17.21
   next: 13.1.1
   next-auth: ^4.18.7
@@ -94,6 +95,7 @@ dependencies:
   google-translate-api: 2.3.0
   google-tts-api: 2.0.2
   howler: 2.2.3
+  jotai: 1.13.1_react@18.2.0
   lodash: 4.17.21
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_5c5gjds27eda56zlahldgx35pi
@@ -4146,6 +4148,49 @@ packages:
 
   /jose/4.11.2:
     resolution: {integrity: sha512-njj0VL2TsIxCtgzhO+9RRobBvws4oYyCM8TpvoUQwl/MbIM3NFJRR9+e6x0sS5xXaP1t6OCBkaBME98OV9zU5A==}
+    dev: false
+
+  /jotai/1.13.1_react@18.2.0:
+    resolution: {integrity: sha512-RUmH1S4vLsG3V6fbGlKzGJnLrDcC/HNb5gH2AeA9DzuJknoVxSGvvg8OBB7lke+gDc4oXmdVsaKn/xDUhWZ0vw==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      '@babel/template': '*'
+      jotai-devtools: '*'
+      jotai-immer: '*'
+      jotai-optics: '*'
+      jotai-redux: '*'
+      jotai-tanstack-query: '*'
+      jotai-urql: '*'
+      jotai-valtio: '*'
+      jotai-xstate: '*'
+      jotai-zustand: '*'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      jotai-devtools:
+        optional: true
+      jotai-immer:
+        optional: true
+      jotai-optics:
+        optional: true
+      jotai-redux:
+        optional: true
+      jotai-tanstack-query:
+        optional: true
+      jotai-urql:
+        optional: true
+      jotai-valtio:
+        optional: true
+      jotai-xstate:
+        optional: true
+      jotai-zustand:
+        optional: true
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /js-sdsl/4.2.0:
