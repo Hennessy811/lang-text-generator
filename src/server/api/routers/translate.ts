@@ -6,28 +6,28 @@ import axios from "axios";
 // const translationClient = new TranslationServiceClient({
 
 // });
-async function translate({
-  from,
-  text,
-  to,
-}: {
-  text: string;
-  from: string;
-  to: string;
-}) {
+export async function translate({ text, to }: { text: string; to: string }) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${process
     .env.GOOGLE_TRANSLATE_API_KEY!}`;
   const response = await axios.post<{
-    data: { translations: { translatedText: string }[] };
+    data: {
+      translations: {
+        translatedText: string;
+        detectedSourceLanguage: string;
+      }[];
+    };
   }>(url, {
     target: to,
     format: "text",
     q: text,
   });
 
-  const data = response.data?.data?.translations[0]?.translatedText;
+  const data = response.data?.data?.translations[0];
 
-  return data;
+  return {
+    text: data?.translatedText,
+    detectedSourceLanguage: data?.detectedSourceLanguage,
+  };
 }
 
 export const translateRouter = createTRPCRouter({
@@ -35,12 +35,11 @@ export const translateRouter = createTRPCRouter({
     .input(
       z.object({
         text: z.string(),
-        from: z.string(),
         to: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      return translate({ text: input.text, from: input.from, to: input.to });
+      return translate({ text: input.text, to: input.to });
     }),
 
   voiceover: publicProcedure

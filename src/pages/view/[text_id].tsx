@@ -58,6 +58,8 @@ const ViewGeneratedText = (
   const [playingVoiceover, setPlayingVoiceover] = useState(false);
   const textSnippet = useRef<HTMLElement>(null);
 
+  const [sourceLang, setSourceLang] = useState("");
+
   const editTextMutation = api.openai.updateSaved.useMutation({
     onSuccess: () => {
       toast.success("Text updated!");
@@ -99,7 +101,7 @@ const ViewGeneratedText = (
   });
 
   const [translatedSelection, setTranslatedSelection] = useState("");
-  const translateMutation = api.translate.translate.useMutation();
+  const translateMutation = api.translate.translate.useMutation({});
   const voiceoverQuery = api.translate.voiceover.useQuery(
     {
       lang: "en",
@@ -155,13 +157,21 @@ const ViewGeneratedText = (
   const [editedText, setEditedText] = useState("");
 
   useEffect(() => {
+    void translateMutation
+      .mutateAsync({
+        text: textQuery.data?.text ?? "",
+        to: "en",
+      })
+      .then((data) => {
+        setSourceLang(data?.detectedSourceLanguage ?? "");
+      });
+
     const listener = (e: any) => {
       const selection = document.getSelection()?.toString();
 
       if (selection) {
         setTranslatedSelection(selection);
         translateMutation.mutate({
-          from: "fr",
           to: "en",
           text: selection,
         });
@@ -342,7 +352,7 @@ const ViewGeneratedText = (
 
           {translatedSelection && (
             <SkeletonText mt={4} isLoaded={!!translateMutation.data} minH={32}>
-              <Text fontSize="sm">{translateMutation.data}</Text>
+              <Text fontSize="sm">{translateMutation.data?.text}</Text>
             </SkeletonText>
           )}
         </CardBody>
