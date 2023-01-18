@@ -1,7 +1,6 @@
 import * as googleTTS from "google-tts-api"; // ES6 or TypeScript
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
-import { TranslationServiceClient } from "@google-cloud/translate";
 import axios from "axios";
 
 // const translationClient = new TranslationServiceClient({

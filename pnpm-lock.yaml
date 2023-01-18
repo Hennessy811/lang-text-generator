@@ -44,6 +44,7 @@ specifiers:
   eslint-config-next: 13.1.1
   framer-motion: ^8.4.6
   google-translate-api: ^2.3.0
+  google-tts-api: ^2.0.2
   howler: ^2.2.3
   lodash: ^4.17.21
   next: 13.1.1
@@ -90,6 +91,7 @@ dependencies:
   axios: 1.2.3
   framer-motion: 8.4.6_biqbaboplfbrettd7655fr4n2y
   google-translate-api: 2.3.0
+  google-tts-api: 2.0.2
   howler: 2.2.3
   lodash: 4.17.21
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -2484,6 +2486,14 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios/0.21.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios/0.26.1:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
@@ -3733,6 +3743,14 @@ packages:
     dependencies:
       configstore: 2.1.0
       got: 6.7.1
+    dev: false
+
+  /google-tts-api/2.0.2:
+    resolution: {integrity: sha512-MkQYbBJEdom8hJpfEVDfD3tpBtkz0X59C+FNsoRhbnCiFjZRnzyurGQ5OrAr3xkigII56/jmk0JNwZsp450G+Q==}
+    dependencies:
+      axios: 0.21.4
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /gopd/1.0.1:
