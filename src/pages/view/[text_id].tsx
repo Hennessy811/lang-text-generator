@@ -40,7 +40,6 @@ import {
 } from "@fortawesome/pro-solid-svg-icons";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import { useCopyToClipboard, useEvent } from "react-use";
 
 const noRefetch = {
   refetchInterval: 0,
