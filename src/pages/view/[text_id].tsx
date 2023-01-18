@@ -56,7 +56,7 @@ const ViewGeneratedText = (
   const session = useSession();
   const utils = api.useContext();
   const [playingVoiceover, setPlayingVoiceover] = useState(false);
-  const textSnippet = useRef(null);
+  const textSnippet = useRef<HTMLElement>(null);
 
   const editTextMutation = api.openai.updateSaved.useMutation({
     onSuccess: () => {
@@ -155,7 +155,7 @@ const ViewGeneratedText = (
   const [editedText, setEditedText] = useState("");
 
   useEffect(() => {
-    const listener = (e) => {
+    const listener = (e: any) => {
       const selection = document.getSelection()?.toString();
 
       if (selection) {
