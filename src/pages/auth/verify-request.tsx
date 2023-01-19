@@ -1,18 +1,10 @@
 import {
   Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
   Stack,
-  Link,
-  Button,
   Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function AuthPage() {

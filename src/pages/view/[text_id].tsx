@@ -66,7 +66,7 @@ const ViewGeneratedText = (
 
   const [targetLang, setTargetLang] = useState("en");
   useEffect(() => {
-    setTargetLang(isBrowser ? navigator.language.split("-")[0] : "en");
+    setTargetLang(isBrowser ? navigator.language.split("-")[0] ?? "en" : "en");
   }, []);
 
   const editTextMutation = api.openai.updateSaved.useMutation({

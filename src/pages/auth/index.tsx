@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/utils/api";
 import {
   Flex,
   Box,
@@ -12,6 +13,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import type { GetServerSideProps } from "next";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
@@ -78,3 +80,19 @@ export default function AuthPage() {
     </Flex>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (context.resolvedUrl.includes("callback")) {
+    const url = decodeURIComponent(
+      context.resolvedUrl.replace("/auth?callbackUrl=", "")
+    );
+
+    return {
+      redirect: { destination: `${url}`, permanent: false },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
