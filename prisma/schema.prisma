@@ -71,6 +71,7 @@ model GeneratedText {
     user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId    String?   @db.ObjectId
 
+    title    String? @default("")
     prompt   String
     topic    String
     keywords String

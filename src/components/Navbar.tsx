@@ -57,13 +57,6 @@ export default function Navbar() {
             </Box>
 
             <Flex alignItems={"center"} gap={4}>
-              <Button
-                title="Translation will be to English"
-                isDisabled
-                leftIcon={<FontAwesomeIcon icon={faLanguage} />}
-              >
-                EN
-              </Button>
               <Stack direction={"row"} spacing={4}>
                 <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

@@ -41,11 +41,27 @@ ${
       });
 
       const text = response.data.choices[0]?.text;
+
       if (!text)
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "No response from OpenAI",
         });
+
+      const titleResponse = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `For the following text, write a title that would make you want to read it:
+        
+${text}
+        `,
+        temperature: 0.7,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      });
+
+      const title = titleResponse.data.choices[0]?.text;
 
       const saved = await ctx.prisma.generatedText.create({
         data: {
@@ -56,6 +72,7 @@ ${
           level,
           topic,
           prompt,
+          title,
         },
       });
 

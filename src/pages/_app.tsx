@@ -24,10 +24,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
-        <AppShell>
-          <Component {...pageProps} />
-          <ToastContainer />
-        </AppShell>
+        <Component {...pageProps} />
+        <ToastContainer />
         {process.env.NODE_ENV === "development" && (
           <ReactQueryDevtools initialIsOpen={false} />
         )}

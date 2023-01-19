@@ -7,7 +7,7 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
     <>
       <Navbar />
 
-      <Container maxW="container.lg" mt={12}>
+      <Container maxW="container.lg" my={12}>
         {children}
       </Container>
     </>

@@ -30,6 +30,9 @@ import { faMagicWandSparkles } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { languages } from "@/utils/languages";
+import { entries, groupBy, sortBy } from "lodash";
+import AppShell from "@/components/AppShell";
 
 const templates = [
   {
@@ -37,7 +40,7 @@ const templates = [
     description: "A simple text about travel for beginners",
     topic: "Travel",
     level: "Beginner",
-    language: "English",
+    language: "en",
     length: "Short",
     keywords: "raining cats and dogs, watermelon, pumped-up",
   },
@@ -46,7 +49,7 @@ const templates = [
     description: "A movie review in French",
     topic: "Movie review",
     level: "Intermediate",
-    language: "French",
+    language: "fr",
     length: "Medium",
     keywords: "",
   },
@@ -55,7 +58,7 @@ const templates = [
     description: "A simple text about cooking in Portuguese",
     topic: "Cooking",
     level: "Intermediate",
-    language: "Portuguese",
+    language: "pt",
     length: "Long",
     keywords: "",
   },
@@ -76,7 +79,7 @@ const Home: NextPage = () => {
   });
 
   const [topic, setTopic] = useState("Travel");
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState("en");
   const [level, setLevel] = useState("beginner");
   const [paragraphs, setParagraphs] = useState("3");
   const [keywords, setKeywords] = useState(
@@ -84,7 +87,7 @@ const Home: NextPage = () => {
   );
 
   return (
-    <>
+    <AppShell>
       <Head>
         <title>TextMastery Tutor</title>
         <meta
@@ -114,11 +117,36 @@ const Home: NextPage = () => {
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Language</FormLabel>
-              <Input
+              <Select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+              >
+                {/* {sortBy(
+                  entries(groupBy(languages, (i) => i[0]?.toUpperCase())),
+                  (i) => i[0]
+                ).map(([letter, langs]) => (
+                  <optgroup label={letter} key={letter}>
+                    {entries(langs).map(([code, title]) => (
+                      <option key={code} value={code}>
+                        {title}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))} */}
+
+                {sortBy(entries(languages), (i) => i[1]).map(
+                  ([code, title]) => (
+                    <option key={code} value={code}>
+                      {title}
+                    </option>
+                  )
+                )}
+              </Select>
+              {/* <Input
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
                 type="text"
-              />
+              /> */}
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Level</FormLabel>
@@ -211,7 +239,7 @@ const Home: NextPage = () => {
           </div>
         </CardBody>
       </Card>
-    </>
+    </AppShell>
   );
 };
 
@@ -241,7 +269,7 @@ const TemplateCard = ({
         <Wrap mt={2} fontSize="sm">
           <Tag colorScheme={"blue"}>{template.topic}</Tag>
           <Tag mt={2} colorScheme={"green"}>
-            in {template.language}
+            in {languages[template.language]}
           </Tag>
           <Tag colorScheme={"orange"}>for {template.level}</Tag>
           <Tag colorScheme={"teal"}>{template.length}</Tag>
