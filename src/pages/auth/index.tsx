@@ -81,6 +81,7 @@ export default function AuthPage() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.resolvedUrl.includes("callback")) {
     const url = decodeURIComponent(
