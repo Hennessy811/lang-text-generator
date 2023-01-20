@@ -49,13 +49,22 @@ export const translateRouter = createTRPCRouter({
         lang: z.string(),
       })
     )
-    .query(async ({ ctx, input }) => {
-      return googleTTS.getAllAudioBase64(input.text, {
+    .query(async ({ input }) => {
+      const text = input.text.split(".").filter(i => !!i.trim().length)
+
+      const res = await Promise.all(text.map(i => googleTTS.getAllAudioBase64(i, {
         lang: input.lang,
-        slow: false,
-        host: "https://translate.google.com",
-        timeout: 10000,
-        splitPunct: ",.?",
-      });
+        slow: true,
+      })))
+      return res.flat();
+
+
+      // return googleTTS.getAllAudioBase64(input.text, {
+      //   lang: input.lang,
+      //   slow: true,
+      //   host: "https://translate.google.com",
+      //   timeout: 10000,
+      //   splitPunct: ",.?",
+      // });
     }),
 });

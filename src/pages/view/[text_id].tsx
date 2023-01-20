@@ -46,6 +46,7 @@ import { toast } from "react-toastify";
 import { languages } from "@/utils/languages";
 import { isBrowser } from "framer-motion";
 import AppShell from "@/components/AppShell";
+import { NextSeo } from "next-seo";
 
 const noRefetch = {
   refetchInterval: 0,
@@ -184,10 +185,11 @@ const ViewGeneratedText = (
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       textSnippet.current?.removeEventListener("mouseup", listener);
     };
-  }, []);
+  }, [targetLang]);
 
   return (
     <AppShell>
+      <NextSeo title={textQuery.data?.title ?? "View text"} />
       <Flex gap={6}>
         {!editMode && (
           <Card flex={3}>

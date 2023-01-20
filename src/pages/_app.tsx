@@ -16,6 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 import AppShell from "../components/AppShell";
 import theme from "../utils/theme";
+import { DefaultSeo } from "next-seo";
+import seo from "@/utils/next-seo.config";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -24,6 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
+        <DefaultSeo {...seo} />
         <Component {...pageProps} />
         <ToastContainer />
         {process.env.NODE_ENV === "development" && (

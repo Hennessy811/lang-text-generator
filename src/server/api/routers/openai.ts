@@ -5,6 +5,17 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
 export const openaiRouter = createTRPCRouter({
+  savedTexts: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.generatedText.findMany({
+      where: {
+        userId: ctx.session.user.id
+      },
+      take: 5,
+      orderBy: {
+        createdAt: "desc"
+      }
+    })
+  }),
   generate: publicProcedure
     .input(
       z.object({
@@ -24,12 +35,13 @@ export const openaiRouter = createTRPCRouter({
        * Also, include the following keywords and phrases: raining cats and dogs, watermelon, pumped-up
        */
 
-      const prompt = `I'm a language tutor. Give me a ${length}-paragraph text about ${topic} topic in ${language} language. Write it so ${level} level student can understand it on their own
-${
-  !!keywords.trim().length
-    ? `Also, include the following keywords and phrases: ${keywords}`
-    : ""
-}`;
+      const prompt = `I'm a language tutor. Give me a text about ${topic} topic in ${language} language. Write it so ${level} level student can understand it on their own.
+It should have ${length} paragraphs, but dont mention paragraph in its title.
+
+${!!keywords.trim().length
+          ? `Also, include the following keywords and phrases: ${keywords}.`
+          : ""
+        }`;
       const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: prompt,
